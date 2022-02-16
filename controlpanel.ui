@@ -52,7 +52,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QRadioButton" name="radioButton_6">
+           <widget class="QRadioButton" name="radioButton">
             <property name="text">
              <string>Крафт изготовление</string>
             </property>
@@ -62,19 +62,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioButton_5">
+           <widget class="QRadioButton" name="radioButton_1">
             <property name="text">
              <string>Рыбалка</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButton_3">
-            <property name="text">
-             <string>Лететь к системе</string>
             </property>
             <property name="checked">
              <bool>false</bool>
@@ -82,16 +72,12 @@
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioButton">
+           <widget class="QRadioButton" name="radioButton_2">
             <property name="text">
-             <string>Курсор на станцию</string>
+             <string>Кликер</string>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButton_4">
-            <property name="text">
-             <string>Лететь на станцию</string>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

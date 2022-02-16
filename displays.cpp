@@ -1,7 +1,7 @@
 #include "displays.h"
 
 Displays::Displays(int monitor, int x, int y, int width, int height) :
-    m_monitor_(monitor),
+    m_monitor(monitor),
     m_x(x),
     m_y(y),
     m_width(width),
@@ -44,7 +44,7 @@ cv::Mat Displays::imageFromDisplay(int _format)
     auto screens = QGuiApplication::screens();
     QPixmap pix;    // = screens->grabWindow(0, m_x, m_y, m_width, m_height);
     while(pix.isNull()) {
-        pix = screens[m_monitor_]->grabWindow(0 ,0, 0, m_width, m_height);
+        pix = screens[m_monitor]->grabWindow(0, 0, 0, m_width, m_height);
         if(pix.isNull())
             QThread::msleep(100);
     }

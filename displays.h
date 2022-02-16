@@ -26,7 +26,7 @@ public:
 
 
 private:
-    int m_monitor_;
+    int m_monitor;
     int m_x;
     int m_y;
     int m_width;

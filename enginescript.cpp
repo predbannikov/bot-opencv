@@ -71,8 +71,7 @@ void EngineScript::initDisplay()
             msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::No);
             int ret = msgBox.exec();
             if(ret == QMessageBox::Ok) {
-                qDebug() << screens[i]->size() << " " << i+1 << "monitor" << screens[i]->availableSize() << screens[i]->availableGeometry()
-                         << screens[i]->availableVirtualSize() << screens[i]->availableVirtualGeometry() ;
+                qDebug() << screens[i]->size() << " " << i+1 << "monitor" << screens[i]->availableSize() << screens[i]->availableGeometry() << screens[i]->availableVirtualSize() << screens[i]->availableVirtualGeometry() ;
                 g_screen = screens[i]->availableGeometry();
                 monitor = i;
             }

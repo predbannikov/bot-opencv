@@ -64,8 +64,8 @@ GuiInfo::GuiInfo(IOData *t_ioData, QWidget *parent) : QWidget(parent)
     chckBoxEngine->setFocus();
     panel = new ControlPanel(engine, this);
     panel->show();
-    move(2500, 800);
-    panel->move(g_screen.width(), g_screen.height() - panel->geometry().height() - 50);
+//    move(2500, 800);
+//    panel->move(g_screen.width(), g_screen.height() - panel->geometry().height() - 50);
 //    qDebug() << "test";
 }
 

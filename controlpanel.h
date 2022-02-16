@@ -7,9 +7,12 @@
 #include "enginescript.h"
 #include "global.h"
 
-namespace Ui {
-class ControlPanel;
-}
+
+
+QT_BEGIN_NAMESPACE
+namespace Ui { class ControlPanel; }
+QT_END_NAMESPACE
+
 
 class ControlPanel : public QMainWindow
 {
@@ -29,12 +32,13 @@ public:
 
 
 
-    void test();
-    void manufacturing();
-    void fishing();
     void init();
     void performList();
     void prepScript();
+    void test();
+    void manufacturing();
+    void fishing();
+    void clicker();
 public slots:
     void slotReceivReturnCommand(QStringList aList);
 private slots:
@@ -42,7 +46,6 @@ private slots:
 
     void on_checkBox_2_clicked();
 
-    void on_radioButton_3_clicked();
 
     void on_pushButton_clicked();
 
@@ -56,9 +59,7 @@ private slots:
 
 
 
-    void on_radioButton_5_clicked();
-
-    void on_radioButton_6_clicked();
+    void on_checkBox_2_stateChanged(int arg1);
 
 private:
     Ui::ControlPanel *ui;

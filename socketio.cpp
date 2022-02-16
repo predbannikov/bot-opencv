@@ -7,13 +7,22 @@
 #define     WAIT_MSEC_MOUSE_EVENT   50
 #define     WAIT_MSEC_MOUSE_CLICK   110
 
-SocketIO::SocketIO(MousePoint aPointOffset)
+
+#define     ONE_DISPLAY     1       // Для одного дисплея, смещение нулевое (виртуальная машина)
+
+SocketIO::SocketIO(QPoint aPointOffset)
 {
     sock = new QTcpSocket;
 //    qDebug() << "sock create" << sock->thread()->currentThreadId();
-    m_pointOffset = aPointOffset;
+    if(ONE_DISPLAY) {
+        m_pointOffset = QPoint(0, 0);
+    } else {
+        m_pointOffset = aPointOffset;
+    }
 //    sock->connectToHost("192.168.16.128", 10101);
-    sock->connectToHost("127.0.0.1", 10101);
+//    sock->connectToHost("127.0.0.1", 10101);
+//    sock->connectToHost("192.168.233.128", 10101);
+    sock->connectToHost("172.16.156.128", 10101);
 }
 
 void SocketIO::send(QByteArray a_data)
@@ -132,8 +141,8 @@ void SocketIO::mouse_move(int x, int y)
     QJsonObject jMsg;
     jMsg["target"] = "mouse";
     jMsg["method"] = "move";
-    jMsg["x"] = x + m_pointOffset.x;
-    jMsg["y"] = y + m_pointOffset.y;
+    jMsg["x"] = x + m_pointOffset.x();
+    jMsg["y"] = y + m_pointOffset.y();
     send(QJsonDocument(jMsg).toJson());
     QThread::msleep(WAIT_MSEC_MOUSE_EVENT);
 }
@@ -157,8 +166,8 @@ void SocketIO::mouse_move_click(int x, int y)
     jMsg["target"] = "mouse";
     jMsg["method"] = "move_click";
     jMsg["code"] = "BTN_LEFT";
-    jMsg["x"] = x + m_pointOffset.x;
-    jMsg["y"] = y + m_pointOffset.y;
+    jMsg["x"] = x + m_pointOffset.x();
+    jMsg["y"] = y + m_pointOffset.y();
     send(QJsonDocument(jMsg).toJson());
     QThread::msleep(WAIT_MSEC_MOUSE_CLICK);
 }

@@ -2,20 +2,18 @@
 #define SOCKETIO_H
 #include <QTcpSocket>
 #include <QThread>
+#include <QPoint>
 #include <QJsonDocument>
 #include <QJsonObject>
 
-struct MousePoint {
-    int x = 0;
-    int y = 0;
-};
+
 
 class SocketIO
 {
     QTcpSocket      *sock;
-    MousePoint      m_pointOffset;
+    QPoint          m_pointOffset;
 public:
-    SocketIO(MousePoint aPointOffset);
+    SocketIO(QPoint aPointOffset);
     void send(QByteArray a_data);
     void push_f_key(QString aStr);
     void push_key(QString aChar);

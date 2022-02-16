@@ -51,6 +51,14 @@ void ControlPanel::fishing()
 }
 
 
+void ControlPanel::clicker()
+{
+    qDebug() << "clicker";
+    queue.enqueue(QStringList {"CLICKEROFTIME",             "0", "1" });
+    queue.enqueue(QStringList {"MARKER",                    "0", "clicker"});
+}
+
+
 
 void ControlPanel::init()
 {
@@ -61,13 +69,12 @@ void ControlPanel::init()
 void ControlPanel::prepScript()
 {
     if(ui->checkBox_2->isChecked()) {
-        if(ui->radioButton_6->isChecked()) {
+        if(ui->radioButton->isChecked()) {
             manufacturing();
-        } else if(ui->radioButton->isChecked()) {
-        } else if(ui->radioButton_4->isChecked()) {
-        } else if(ui->radioButton_5->isChecked()) {
+        } else if(ui->radioButton_1->isChecked()) {
             fishing();
-        } else if(ui->radioButton_3->isChecked()) {
+        } else if(ui->radioButton_2->isChecked()) {
+            clicker();
         }
     }
 }
@@ -191,10 +198,6 @@ void ControlPanel::on_checkBox_2_clicked()          // Пуск
 }
 
 
-void ControlPanel::on_radioButton_3_clicked()
-{
-    emit signalSetSide(0);
-}
 
 void ControlPanel::on_pushButton_clicked()          //  ТЕСТ
 {
@@ -226,13 +229,7 @@ void ControlPanel::on_pushButton_clicked()          //  ТЕСТ
 }
 
 
-void ControlPanel::on_radioButton_5_clicked()
-{
-
-}
-
-
-void ControlPanel::on_radioButton_6_clicked()
+void ControlPanel::on_checkBox_2_stateChanged(int arg1)
 {
 
 }

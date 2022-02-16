@@ -37,8 +37,9 @@ void LowLvlEngineScript::update()
 
 void LowLvlEngineScript::init()
 {
-    m_sock = new SocketIO({ g_screen.x(), g_screen.y()});
+    m_sock = new SocketIO(QPoint( g_screen.x(), g_screen.y()));
 
+    actions.append( new SimLegendKult(capture, m_sock));
     actions.append( new ActionWait(capture, m_sock));
     actions.append( new ActionDebug(capture, m_sock));
     actions.append( new RestorGame(capture, m_sock));
@@ -51,6 +52,7 @@ void LowLvlEngineScript::init()
     actions.append( new Manufacturing(capture, m_sock));
     actions.append( new fishing(capture, m_sock));
     actions.append( new Tests(capture, m_sock));
+    actions.append( new ClickerOfTime(capture, m_sock));
 }
 
 LowLvlEngineScript::~LowLvlEngineScript()

@@ -1,5 +1,5 @@
-#ifndef BOT_GLOBAL_H
-#define BOT_GLOBAL_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QElapsedTimer>
@@ -133,7 +133,7 @@ struct Primitives {
 };
 
 
-typedef struct ImageROI_ {
+typedef struct {
     cv::Rect rect;
     cv::Mat mat;
     std::string name;
@@ -208,7 +208,7 @@ public:
     cv::Rect lastRect;
 };
 
-typedef struct VarForTemplateMatch_ {
+typedef struct {
     cv::Point p1;
     cv::Point p2;
     double m1 = 0.0;
@@ -390,4 +390,4 @@ public:
 // *************************************************
 const int count_match_methods = 6;
 
-#endif // BOT_GLOBAL_H
+#endif // GLOBAL_H

@@ -35,20 +35,25 @@ CaptureWindow::CaptureWindow(std::map<std::string, ImageROI> *ap_dataSet, int mo
     mp_dataSet = ap_dataSet;
 
 
-//    cv::namedWindow("win1", cv::WND_PROP_FULLSCREEN);
-    cv::namedWindow("win1", cv::WND_PROP_AUTOSIZE);
-    cv::moveWindow("win1", 0, STANDART_FULLHD_HEIGHT);
+    if(enable_view) {
+        //    cv::namedWindow("win1", cv::WND_PROP_FULLSCREEN);
 
-//    cv::setWindowProperty("win1", cv::WND_PROP_FULLSCREEN, cv::WINDOW_FULLSCREEN);
-    cv::setMouseCallback("win1", my_mouse_callback, this);
-    cv::namedWindow("win2", cv::WND_PROP_AUTOSIZE );
-    cv::namedWindow("win3", cv::WND_PROP_AUTOSIZE );
-    cv::namedWindow("win4", cv::WND_PROP_AUTOSIZE );
-    cv::namedWindow("win5", cv::WND_PROP_AUTOSIZE );
-    cv::moveWindow("win2", 1921, 0);
-    cv::moveWindow("win3", 2000, 0);
-    cv::moveWindow("win4", 2000, 920 / 2 + 130);
-    cv::moveWindow("win5", 2000 + 460, 920 / 2 + 130);
+        cv::namedWindow("win1", cv::WND_PROP_AUTOSIZE);
+        cv::moveWindow("win1", STANDART_FULLHD_WIDTH-1, -STANDART_FULLHD_HEIGHT);
+
+        //    cv::setWindowProperty("win1", cv::WND_PROP_FULLSCREEN, cv::WINDOW_FULLSCREEN);
+
+        cv::setMouseCallback("win1", my_mouse_callback, this);
+        cv::namedWindow("win2", cv::WND_PROP_AUTOSIZE );
+        cv::namedWindow("win3", cv::WND_PROP_AUTOSIZE );
+        cv::namedWindow("win4", cv::WND_PROP_AUTOSIZE );
+        cv::namedWindow("win5", cv::WND_PROP_AUTOSIZE );
+        cv::moveWindow("win2", 0, 0);
+        cv::moveWindow("win3", 0 + 460, 0);
+        cv::moveWindow("win4", 0, 920 / 2 + 130);
+        cv::moveWindow("win5", 0 + 460, 920 / 2 + 130);
+
+    }
 
 
 //    cv::VideoCapture inputVideo(PATH_LOG"\\f.avi");              // Open input
@@ -62,8 +67,6 @@ CaptureWindow::CaptureWindow(std::map<std::string, ImageROI> *ap_dataSet, int mo
 //    cv::Mat _mat = cv::imread("C:\\Users\\user\\AppData\\Local\\autoclicker\\elite\\Gabriel Enterprise.png");
 //    cv::Mat _mat2 = cv::imread("C:\\Users\\user\\AppData\\Local\\autoclicker\\elite\\menu1_contact.png");
 //    //cv::imshow("win2tmp", _mat);
-
-
     myOCREng = new tesseract::TessBaseAPI();
     myOCRRus = new tesseract::TessBaseAPI();
     myOCRRusDigits = new tesseract::TessBaseAPI();
@@ -91,7 +94,7 @@ CaptureWindow::CaptureWindow(std::map<std::string, ImageROI> *ap_dataSet, int mo
     m_cursorPan.sHeaderName ="навигация";
 //    enableResizeImage();
 //    enableSaveVideo();
-//    cv::moveWindow("win1", 0, -STANDART_FULLHD_HEIGHT);
+//    cv::moveWindow("win1", 0, 0);
 //    resizeImage = true;
     m_side = 0;
 //    m_cursorPan.rectBody = cv::Rect(796, 424, 414, 77);
@@ -113,6 +116,7 @@ CaptureWindow::~CaptureWindow()
 
 void CaptureWindow::update()
 {
+
     if(m_flowFrame) {                                                   // Отображение стоп кадра по кнопке 's'
         win = imageFromDisplay();
     } else {
@@ -173,14 +177,15 @@ void CaptureWindow::update()
         m_saveRoi.active = false;
     }
 
+    if(enable_view) {
+        if(resizeImage) {
+            cv::Mat winResize;
+            cv::resize(win, winResize, win.size() / 2);
+            imshow("win1", winResize);
 
-    if(resizeImage) {
-        cv::Mat winResize;
-        cv::resize(win, winResize, win.size() / 2);
-        imshow("win1", winResize);
-
-    } else {
-        imshow("win1", win);
+        } else {
+            imshow("win1", win);
+        }
     }
 
     if(saveVideo) {
@@ -445,7 +450,7 @@ void CaptureWindow::callBackMouse(int event, int x, int y, int flags)
         } else {
             mouse.leftButton = false;
             cv::namedWindow("selectWin");
-            cv::moveWindow("selectWin", 1920, 100);
+            cv::moveWindow("selectWin", 100, 100);
             state.roi = true;
             m_rectMap.insert(std::pair<std::string, cv::Rect >("selectROI", mouse.getAndSaveRect()));
 //            ginfo->show();

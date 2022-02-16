@@ -21,6 +21,8 @@
 #include "actions/manufacturing.h"
 #include "actions/fishing.h"
 #include "actions/tests.h"
+#include "actions/clickeroftime.h"
+#include "actions/simlegendkult.h"
 
 
 

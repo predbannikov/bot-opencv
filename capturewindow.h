@@ -214,6 +214,7 @@ public:
 
     // Вспомогательные функции
     bool resizeImage = false;
+    bool enable_view = false;
     void enableResizeImage();
     bool saveVideo = false;
     void enableSaveVideo();

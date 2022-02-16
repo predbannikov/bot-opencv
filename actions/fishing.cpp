@@ -351,8 +351,8 @@ int fishing::findRectRecognize()
     cv::Mat keyRectMat;
     capture->getMatOfRect(m_src, m_rectSrc);
     cv::cvtColor(m_src, hsv, cv::COLOR_BGR2HSV);
-//    int minVal1 = 15;
-//    bool ret = false;
+    int minVal1 = 15;
+    bool ret = false;
 //        cv::inRange(hsv, minScalar, maxScalar, mask);
     cv::inRange(hsv, cv::Scalar(11, 192, 0), cv::Scalar(34, 255, 255), mask);
 

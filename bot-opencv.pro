@@ -1,9 +1,9 @@
 QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-TEMPLATE = app
 
 DEFINES += QT_DEPRECATED_WARNINGS
+
 
 CONFIG += console
 CONFIG += c+14
@@ -12,9 +12,8 @@ CONFIG += c+14
 #QMAKE_CXXFLAGS_DEBUG += -Zi
 
 RC_FILE     = resource.rc
-
 TARGET = bot-opencv
-
+QMAKE_CXXFLAGS_DEBUG += -O0
 
 
 unix: !macx {
@@ -22,6 +21,7 @@ unix: !macx {
     INCLUDEPATH += /usr/include/tesseract
     LIBS += -L/usr/bin/tesseract \
         -ltesseract
+    LIBS += -lX11   -lopencv_core
     LIBS += -L/usr/local/lib \
     #    -lopencv_superres\
     #    -lopencv_shape\
@@ -39,9 +39,6 @@ unix: !macx {
         -lopencv_imgproc\
         -lopencv_ml\
         -lopencv_objdetect
-
-
-
 }
 
 
@@ -97,6 +94,7 @@ win32-msvc* {
 SOURCES += \
     actions/actiondebug.cpp \
     actions/actionwait.cpp \
+    actions/clickeroftime.cpp \
     actions/fishing.cpp \
     actions/getstrstaticfield.cpp \
     actions/gettextstaticfield.cpp \
@@ -106,8 +104,8 @@ SOURCES += \
     actions/marker.cpp \
     actions/panelinventory.cpp \
     actions/restorgame.cpp \
-    actions/robloxsword.cpp \
     actions/sendeventcontrol.cpp \
+    actions/simlegendkult.cpp \
     actions/tests.cpp \
     aicontrol.cpp \
     baseaction.cpp \
@@ -124,6 +122,7 @@ SOURCES += \
 HEADERS += \
     actions/actiondebug.h \
     actions/actionwait.h \
+    actions/clickeroftime.h \
     actions/fishing.h \
     actions/getstrstaticfield.h \
     actions/gettextstaticfield.h \
@@ -133,8 +132,8 @@ HEADERS += \
     actions/marker.h \
     actions/panelinventory.h \
     actions/restorgame.h \
-    actions/robloxsword.h \
     actions/sendeventcontrol.h \
+    actions/simlegendkult.h \
     actions/tests.h \
     aicontrol.h \
     baseaction.h \
@@ -149,11 +148,9 @@ HEADERS += \
     main.h \
     resource.rc \
     socketio.h
+#    ui_controlpanel.h
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+
 
 FORMS += \
     controlpanel.ui
